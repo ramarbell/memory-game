@@ -1,0 +1,208 @@
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 48px;
+}
+
+body {
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.heading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.difficulty-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.difficulty-card-button {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.difficulty-card-button:hover {
+  background-color: #f0f0f0;
+}
+
+.difficulty-card-button.active {
+  background-color: #4f46e5;
+  color: white;
+}
+
+.game-board {
+  display: grid;
+  grid-template-columns: repeat(4, 100px);
+  grid-auto-rows: 100px;
+  gap: var(--space-3);
+  width: max-content;
+  min-height: 400px;
+  background-color: #f0f0f0;
+  border: 1px solid #000;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  align-content: space-evenly;
+}
+
+.game-board.medium {
+  grid-template-columns: repeat(5, 100px);
+}
+
+.game-board.hard {
+  grid-template-columns: repeat(6, 100px);
+}
+
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70px;
+  height: 70px;
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.card-inner {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+  position: relative;
+}
+
+.card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card.flipped {
+  cursor: not-allowed;
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+}
+
+.content {
+  padding: var(--space-3);
+}
+
+.panel {
+  display: flex;
+  align-items: center;
+}
+
+.score-panel {
+  display: flex;
+  height: 70px;
+  width: 25%;
+  border: black solid;
+  padding: 0.25rem 1rem;
+  background-color: white;
+  margin: auto;
+  margin-top: var(--space-6);
+  text-align: center;
+  border-radius: 2rem;
+  align-items: center;
+}
+
+.reset-button {
+  height: 70px;
+  width: 25%;
+  border: black solid;
+  padding: 0.25rem 1rem;
+  background: #4f46e5;
+  color: white;
+  margin: auto;
+  margin-top: var(--space-6);
+  text-align: center;
+  border-radius: 2rem;
+  align-items: center;
+  cursor: pointer;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: white;
+  padding: 2rem;
+  border-radius: 16px;
+  text-align: center;
+  width: 300px;
+  animation: pop 0.3s ease-out;
+}
+
+.modal h2 {
+  margin-bottom: 0.5rem;
+}
+
+.modal button {
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  background: #4f46e5;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.modal button:hover {
+  transform: scale(1.05);
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
