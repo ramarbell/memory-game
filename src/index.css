@@ -5,6 +5,13 @@
   --space-4: 24px;
   --space-5: 32px;
   --space-6: 48px;
+  --board-columns: 4;
+  --board-cell-size: 100px;
+  --card-size: 70px;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
@@ -12,7 +19,13 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
+  margin: 0;
+  padding: var(--space-4);
+}
+
+#root {
+  width: 100%;
 }
 
 .heading {
@@ -49,10 +62,11 @@ body {
 
 .game-board {
   display: grid;
-  grid-template-columns: repeat(4, 100px);
-  grid-auto-rows: 100px;
+  grid-template-columns: repeat(var(--board-columns), var(--board-cell-size));
+  grid-auto-rows: var(--board-cell-size);
   gap: var(--space-3);
   width: max-content;
+  max-width: 100%;
   min-height: 400px;
   background-color: #f0f0f0;
   border: 1px solid #000;
@@ -66,19 +80,19 @@ body {
 }
 
 .game-board.medium {
-  grid-template-columns: repeat(5, 100px);
+  --board-columns: 5;
 }
 
 .game-board.hard {
-  grid-template-columns: repeat(6, 100px);
+  --board-columns: 6;
 }
 
 .card {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 70px;
-  height: 70px;
+  width: var(--card-size);
+  height: var(--card-size);
   background-color: #fff;
   border: 1px solid #000;
   border-radius: 10px;
@@ -204,5 +218,121 @@ body {
   to {
     transform: scale(1);
     opacity: 1;
+  }
+}
+
+@media (max-width: 760px) {
+  :root {
+    --space-3: 12px;
+    --space-4: 18px;
+    --space-6: 28px;
+    --board-cell-size: 76px;
+    --card-size: 58px;
+  }
+
+  body {
+    align-items: flex-start;
+    padding: var(--space-3);
+  }
+
+  .heading {
+    flex-direction: column;
+    gap: var(--space-2);
+    text-align: center;
+  }
+
+  .heading h1 {
+    margin-bottom: 0;
+  }
+
+  .difficulty-card {
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .difficulty-card-button {
+    min-width: 84px;
+    min-height: 40px;
+    padding: var(--space-2) var(--space-3);
+  }
+
+  .game-board {
+    min-height: auto;
+    gap: var(--space-2);
+    padding: var(--space-2);
+  }
+
+  .game-board.medium,
+  .game-board.hard {
+    --board-columns: 4;
+  }
+
+  .content {
+    padding: var(--space-2);
+  }
+
+  .panel {
+    justify-content: center;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+  }
+
+  .score-panel,
+  .reset-button {
+    width: auto;
+    min-width: 110px;
+    height: 52px;
+    margin: var(--space-4) 0 0;
+    justify-content: center;
+    border-radius: 16px;
+  }
+}
+
+@media (max-width: 420px) {
+  :root {
+    --board-cell-size: 64px;
+    --card-size: 50px;
+  }
+
+  body {
+    padding: var(--space-2);
+  }
+
+  .heading h1 {
+    font-size: 1.7rem;
+  }
+
+  .difficulty-card {
+    gap: var(--space-2);
+  }
+
+  .difficulty-card-button {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .game-board,
+  .game-board.hard {
+    --board-columns: 3;
+  }
+
+  .game-board.medium {
+    --board-columns: 4;
+  }
+
+  .card {
+    padding: var(--space-2);
+    border-radius: 8px;
+  }
+
+  .score-panel,
+  .reset-button {
+    min-width: 96px;
+    padding: var(--space-2);
+  }
+
+  .modal {
+    width: min(300px, calc(100vw - 32px));
   }
 }
